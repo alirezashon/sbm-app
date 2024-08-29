@@ -1,10 +1,13 @@
-import Layout from '../components/Layout';
-import WalletOverview from '../components/Wallet';
-
-export default function Home() {
+import Reports from '@/components/Report'
+import WalletOverview from '../components/Wallet'
+import styles from '../styles/page.module.css'
+const Home = () => {
   return (
-    <Layout>
+    <div className={styles.container}>
       <WalletOverview />
-    </Layout>
-  );
+      <Reports />
+    </div>
+  )
 }
+
+export default Home

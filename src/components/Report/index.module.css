@@ -1,0 +1,111 @@
+.reportsSection {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0099a8;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filterLabel {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchButton {
+  background-color: #0099a8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tableContainer {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+.table td p {
+  border-radius: 1vh;
+}
+.statusPending {
+  color:#e2a830  ;
+  background-color:#faf3cb;
+}
+
+.statusSuccess {
+  background-color: #dafee5;
+  color: #0f973d;
+}
+
+.statusFailed {
+  color: #d42620;
+  background-color: #fee3e2;
+}
+
+.statusCancelled {
+  color: #7747c0;
+  background-color: #e1dcf8;
+}
+
+.statusReturned {
+  color: #2f3237;
+  background-color: #eaeaea;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pageNumber {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pageNumber:hover {
+  background-color: #f4f4f4;
+}

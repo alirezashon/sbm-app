@@ -1,0 +1,88 @@
+.sidebar {
+    height: 100vh;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+  
+  .closed {
+    width: 5vw;
+  }
+  
+  .open {
+    width: 18vw;
+  }
+  
+  .toggleButton {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+    cursor: pointer;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 2vh 0;
+  }
+  
+  .menuItem {
+    padding: 2vh 3vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    cursor: pointer;
+  }
+  
+  .itemHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .link{
+    color: rgb(36, 36, 36);
+    text-decoration: none;
+    margin-left: 1vw;
+    flex-grow: 1;
+  }
+  
+  .active {
+    background-color: #e5e5e5;
+  }
+  
+  .arrow {
+    cursor: pointer;
+  }
+  
+  .subMenu {
+    list-style: none;
+    padding-left: 3vw;
+  }
+  
+  .subMenuItem {
+    padding: 1vh 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .subMenuItem a {
+    margin-left: 1vw;
+    flex-grow: 1;
+  }
+  
+  @media (max-width: 999px) {
+    .sidebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+    }
+  
+    .closed {
+      left: -18vw;
+    }
+  }
+  

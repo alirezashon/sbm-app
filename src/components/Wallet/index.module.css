@@ -1,21 +1,17 @@
 .walletBox {
   background-color: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 1vh;
   border: solid 3px transparent;
-  border-radius: 50px;
+  border-radius: 2vh;
   background: linear-gradient(#ffffff, #ffffff) padding-box,
-    linear-gradient(
-        90deg,
-        #9900cc  10%,
-        #ffffff 20%,
-        #9900cc 30%,
-        #ffffff 40%,
-        #9900cc  50%,
-        #ffffff 60%,
-        #9900cc 70%,
-        #ffffff 80%
-      )
+  conic-gradient(
+    from 135deg,
+    #9933cc,
+    #e5def0,
+    #a674e3,
+    #e5def0,
+    #9933cc
+  ),
       border-box;
 }
 
@@ -58,7 +54,7 @@
   height: 100%;
 }
 
-.actions button {
+.actions div{
   margin: 5px 0;
   padding: 10px 20px;
   border-radius: 5px;

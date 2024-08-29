@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Vazir;
+  src: url('../../public/font/Vazirmatn-Medium.ttf');
+}
+@font-face {
+  font-family: IranSans;
+  src: url('../../public/font/IRANSansWeb\(FaNum\).ttf');
+}
+* {
+  transition: all 0.4s;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+body {
+  font-family: Vazir;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+.number-font{
+  font-family: IranSans;
+}

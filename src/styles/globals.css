@@ -11,12 +11,18 @@
   box-sizing: border-box;
   direction: rtl;
 }
-
 body {
   font-family: Vazir;
   margin: 0;
 }
+button {
+  font-family: Vazir;
+}
+button:hover,
+.scaleOnHover:hover {
+  transform: scale(1.1);
+}
 
-.number-font{
+.number-font {
   font-family: IranSans;
 }

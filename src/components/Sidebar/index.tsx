@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { data, Items } from './data'
+import { data } from './data'
 import styles from './index.module.css'
 import {
   Arrow,
@@ -8,35 +8,51 @@ import {
   Dashboard,
   VisitWallet,
   Add,
-  Withdraw,
   SendMoney,
   Swap,
+  MainWallet,
+  OnlineChat,
+  Call,
+  SignOut,
 } from '../IconGenerator'
 import Link from 'next/link'
 import Image from 'next/image'
-
+const user = {
+  name: 'محدثه عالمی',
+  src: '/images/2.png',
+}
 const Sidebar: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(true)
+  const iconList = [
+    Dashboard,
+    MainWallet,
+    VisitWallet,
+    Add,
+    SendMoney,
+    Swap,
+    OnlineChat,
+    Call,
+  ]
 
-  const generateIcon = (index: number, parentOpen: boolean) => {
-    const iconList = [
-      <Dashboard color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
-      <VisitWallet
-        color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'}
-      />,
-      <Withdraw color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
-      <SendMoney color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
-      <Swap color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
-    ]
-    return iconList[index]
+  const generateIcon = (iconIndex: number | undefined, color: string) => {
+    if (
+      iconIndex === undefined ||
+      iconIndex < 0 ||
+      iconIndex >= iconList.length
+    ) {
+      return null
+    }
+
+    const IconComponent = iconList[iconIndex]
+    return <IconComponent color={color} />
   }
 
   return (
     <div
       className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
     >
-      <div className={`${styles.topSection}`}>
+      <div className={`${styles.topSection} ${styles.bottomBorder}`}>
         {isOpen && (
           <Image
             src={'/icons/logo.svg'}
@@ -56,21 +72,32 @@ const Sidebar: React.FC = () => {
         {data.map((item, index) => (
           <li
             key={index}
-            className={`${styles.menuItem} `}
+            className={`${styles.menuItem} ${
+              openIndex === index && styles.bottomBorder
+            }`}
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
+            {isOpen && index === 4 ? (
+              <p>دسترسی سریع</p>
+            ) : (
+              isOpen && index === 5 && <p>پشتیبانی تلفنی</p>
+            )}
             <div
               className={`${styles.itemHeader} ${
                 openIndex === index ? styles.active : ''
               }`}
             >
-              {generateIcon(index, openIndex === index)}
+              {generateIcon(
+                item.iconIndex,
+                openIndex === index ? 'white' : isOpen ? 'gray' : '#50545F'
+              )}
               {isOpen && (
                 <Link
                   className={`${styles.link} ${
                     openIndex === index ? styles.active : ''
                   }`}
                   href={item.link}
+                  target='_blank'
                 >
                   {item.name}
                 </Link>
@@ -88,14 +115,20 @@ const Sidebar: React.FC = () => {
                 </div>
               )}
             </div>
-
+            {/* SUB ITEMS */}
             {item.subItems && openIndex === index && isOpen && (
               <ul className={styles.subMenu}>
                 {item.subItems.map((subItem, subIndex) => (
                   <li key={subIndex} className={styles.subMenuItem}>
-                    <Link className={styles.link} href={subItem.link}>
-                      {subItem.name}
-                      {generateIcon(index, openIndex === index)}
+                    <Link
+                      className={styles.link}
+                      href={subItem.link}
+                      target='_blank'
+                    >
+                      <div className={`${styles.subItems}`}>
+                        {generateIcon(subItem.iconIndex, '#50545F')}
+                        {subItem.name}
+                      </div>
                     </Link>
                   </li>
                 ))}
@@ -103,6 +136,24 @@ const Sidebar: React.FC = () => {
             )}
           </li>
         ))}
+        <div className={styles.user}>
+          <div className={styles.username}>
+            <Image
+              src={user.src}
+              className={styles.userImage}
+              alt={'پروفایل کاربر'}
+              width={100}
+              height={100}
+              id='img'
+            />
+            <div
+              className={styles.status}
+            >
+            </div>
+            {user.name}
+          </div>
+          <SignOut />
+        </div>
       </ul>
     </div>
   )

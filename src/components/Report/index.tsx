@@ -2,12 +2,14 @@
 import { useState } from 'react'
 import styles from './index.module.css'
 import { data, headers } from './data'
-import { Details, Receipt, Search, Upload } from '../IconGenerator'
+import { Arrow, Details, Receipt, Search, Upload } from '../IconGenerator'
 import DatePicker from 'react-datepicker2'
 import 'react-modern-calendar-datepicker/lib/DatePicker.css'
 import moment from 'moment-jalaali'
+import { formatNumberWithCommas } from '@/lib'
 const Reports: React.FC = () => {
   const [selectedDay, setSelectedDay] = useState({ value: moment() })
+  const [currentPage, setCurrentPage] = useState<number>(4)
   return (
     <div className={styles.reportsSection}>
       <div className={styles.reportDetails}>
@@ -42,17 +44,7 @@ const Reports: React.FC = () => {
           </div>
           <div className={styles.searchInputs}>
             <div className={styles.searchInputsRow}>
-              <label className={styles.filterLabel}>از تاریخ:</label>
-              <DatePicker
-                onChange={(value) => setSelectedDay({ value: value })}
-                value={selectedDay.value}
-                isGregorian={false}
-                timePicker={false}
-                className={styles.input}
-              />
-            </div>{' '}
-            <div className={styles.searchInputsRow}>
-              <label className={styles.filterLabel}>تا تاریخ:</label>
+              <label className={styles.filterLabel}>از تاریخ</label>
               <DatePicker
                 onChange={(value) => setSelectedDay({ value: value })}
                 value={selectedDay.value}
@@ -62,7 +54,17 @@ const Reports: React.FC = () => {
               />
             </div>
             <div className={styles.searchInputsRow}>
-              <label className={styles.filterLabel}>از مبلغ:</label>
+              <label className={styles.filterLabel}>تا تاریخ</label>
+              <DatePicker
+                onChange={(value) => setSelectedDay({ value: value })}
+                value={selectedDay.value}
+                isGregorian={false}
+                timePicker={false}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.searchInputsRow}>
+              <label className={styles.filterLabel}>از مبلغ</label>
               <input
                 type='number'
                 placeholder='مبلغ'
@@ -70,7 +72,7 @@ const Reports: React.FC = () => {
               />
             </div>
             <div className={styles.searchInputsRow}>
-              <label className={styles.filterLabel}>تا مبلغ:</label>
+              <label className={styles.filterLabel}>تا مبلغ</label>
               <input
                 type='number'
                 className={styles.input}
@@ -78,10 +80,12 @@ const Reports: React.FC = () => {
               />
             </div>
           </div>
-          <button className={styles.searchButton}>
-            <Search />
-            جستجو
-          </button>
+          <div className={styles.searcBox}>
+            <button className={styles.searchButton}>
+              <Search />
+              جستجو
+            </button>
+          </div>
         </div>
       </div>
 
@@ -97,13 +101,17 @@ const Reports: React.FC = () => {
           <tbody>
             {data.map((report, index) => (
               <tr key={index}>
-                <td>{report.rowNumber}</td>
-                <td>{report.id}</td>
+                <td className={'number-font'}>{report.rowNumber}</td>
+                <td className={'number-font'}>{report.id}</td>
                 <td>{report.wallet}</td>
                 <td>{report.transactionType}</td>
-                <td>{report.amount}</td>
-                <td>{report.bankFee}</td>
-                <td>{report.date}</td>
+                <td className={'number-font'}>
+                  {formatNumberWithCommas(parseInt(report.amount))}
+                </td>
+                <td className={'number-font'}>
+                  {formatNumberWithCommas(parseInt(report.bankFee))}
+                </td>
+                <td className={'number-font'}>{report.date}</td>
                 <td>{report.description}</td>
                 <td>
                   <p
@@ -123,17 +131,34 @@ const Reports: React.FC = () => {
                   </p>
                 </td>
                 <td>
-                  <Details color='#98A2B3' />
+                  <Details />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className={styles.pagination}>
-          <span className={styles.pageNumber}>1</span>
-          <span className={styles.pageNumber}>2</span>
-          <span className={styles.pageNumber}>3</span>
-        </div>{' '}
+          {currentPage < 10 && (
+            <div
+              className={styles.last}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              <Arrow color='#7747C0' />
+            </div>
+          )}
+          <div className={`${styles.pageNumber} number-font`}>
+            {`${currentPage} `}
+            از 10
+          </div>
+          {currentPage !== 1 && (
+            <div
+              className={styles.next}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              <Arrow color='#7747C0' />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

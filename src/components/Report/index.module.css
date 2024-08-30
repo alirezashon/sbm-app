@@ -32,8 +32,9 @@
   justify-content: space-around;
   align-items: center;
   width: 40%;
+  margin-bottom: 3vh;
 }
-.radioGroup label{
+.radioGroup label {
   display: flex;
   align-items: center;
 }
@@ -43,24 +44,31 @@
   -moz-appearance: none;
   width: 3vh;
   height: 3vh;
-  border: 2px solid #7747C0;
+  border: 2px solid #7747c0;
   border-radius: 50%;
   outline: none;
   cursor: pointer;
   position: relative;
   background-color: white;
 }
+
 .radioGroup input[type='radio']::before {
   content: '';
   width: 1.5vh;
   height: 1.5vh;
-  background-color: #7747C0;
+  background-color: transparent;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease-in-out;
 }
+
+.radioGroup input[type='radio']:checked::before {
+  background-color: #7747c0;
+}
+
 .filters {
   display: flex;
   flex-direction: column;
@@ -71,19 +79,24 @@
   margin: 1vh;
 }
 
-.searchInputs{
+.searchInputs {
   display: flex;
   justify-content: space-around;
 }
 .input {
-  width:18vw;
+  width: 18vw;
   font-family: IranSans;
   margin-bottom: 10px;
-  padding:1vh;
+  padding: 1vh;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
+.searcBox {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2vh;
+}
 .searchButton {
   background-color: #7747c0;
   display: flex;
@@ -93,7 +106,7 @@
   color: white;
   border: none;
   padding: 1vh;
-  width: 20%;
+  width: 18%;
   border-radius: 1vh;
   cursor: pointer;
 }
@@ -110,13 +123,27 @@
 
 .table th,
 .table td {
+  cursor: pointer;
   text-align: center;
   padding: 10px;
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
-
+.table th:first-child,
+.table td:first-child {
+  border-right: 1px solid #ddd;
+}
+.table th:last-child,
+.table td:last-child {
+  border-left: 1px solid #ddd;
+}
 .table th {
-  background-color: #f4f4f4;
+  font-weight: lighter;
+  padding: 2vh;
+  background-color: #f3f4f5;
+}
+.table td:hover {
+  background-color: #f3f4f5;
 }
 .table td p {
   border-radius: 1vh;
@@ -147,19 +174,47 @@
 }
 
 .pagination {
-  margin-top: 20px;
+  margin-top: 4vh;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
-
+.next {
+  transform: rotate(90deg);
+}
+.last {
+  transform: rotate(270deg);
+}
+.next:hover,
+.last:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
 .pageNumber {
   display: inline-block;
   padding: 5px 10px;
-  margin: 0 5px;
+  margin: 0 2vh;
   border: 1px solid #ddd;
+  background-color: #e1dcf8;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .pageNumber:hover {
   background-color: #f4f4f4;
+}
+@media (max-width: 999px) {
+  .radioGroup {
+    width: 100%;
+  }
+  .searchInputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
+  }
+  .input {
+    width: 100%;
+  }
+  .searchButton {
+    width: 30%;
+  }
 }

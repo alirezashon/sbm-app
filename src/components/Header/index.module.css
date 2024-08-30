@@ -11,3 +11,8 @@
     justify-content: space-around;
     align-items: center;
 }
+@media (max-width: 999px) {
+  .userBox{
+  width:  65%;
+    }
+}

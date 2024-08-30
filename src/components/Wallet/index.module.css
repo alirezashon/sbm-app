@@ -48,9 +48,18 @@
   padding: 1vh;
   border: solid 3px transparent;
   border-radius: 2vh;
-  background: linear-gradient(#ffffff, #ffffff) padding-box,
-    conic-gradient(from 135deg, #9933cc, #e5def0, #a674e3, #e5def0, #9933cc),
-    border-box;
+  background: linear-gradient(white, white) padding-box,
+    conic-gradient(
+        rgb(246, 230, 255),
+        #ffffff 18%,
+        #644a9e 31% 43%,
+        rgb(228, 228, 255),
+        #ffffff,
+        #7a5fb7,
+        #e7d9d5,
+        #e4e0ed
+      )
+      border-box;
   display: flex;
   width: 100%;
 }
@@ -73,17 +82,17 @@
   font-size: 1.2rem;
 }
 
-.balanceRow{
+.balanceRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
-.balanceRow span{
-  color: #747B8E;
+.balanceRow span {
+  color: #747b8e;
 }
-.balanceRow p{
-  color: #0F973D;
+.balanceRow p {
+  color: #0f973d;
 }
 .actions {
   display: flex;
@@ -103,34 +112,38 @@
 }
 
 .increaseBalance {
-  background-color: #0F973D;
+  background-color: #0f973d;
   color: white;
 }
 
 .convert {
-  background-color: #7747C0;
+  background-color: #7747c0;
   color: white;
 }
 
 .withdraw {
-  background-color: #D42620;
+  background-color: #d42620;
   color: white;
 }
 
-.chartContainer{
+.chartContainer {
   width: 40%;
   margin-top: 20px;
   display: flex;
   align-items: center;
 }
-@media (max-width:999px) {
-  .topWalletBox{
+@media (max-width: 999px) {
+  .mainWalletBox {
     flex-direction: column;
     align-items: center;
     gap: 1vh;
   }
-  .VisitWallet,
-.HealthPortalWallet {
-  width: 77%;
+.topWalletBox,.chartContainer{
+  width: 100%;
+  display: block;
+}
+.VisitWallet, .HealthPortalWallet{
+  width: 100%;
+  margin: 2vh;
 }
 }

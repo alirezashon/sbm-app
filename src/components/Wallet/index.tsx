@@ -55,15 +55,15 @@ const WalletOverview: React.FC = () => {
           </div>
 
           <div className={styles.actions}>
-            <div className={styles.withdraw}>
+            <div className={`scaleOnHover ${styles.withdraw}`}>
               <Withdraw color='#ffffff' />
               برداشت
             </div>
-            <div className={styles.convert}>
+            <div className={`scaleOnHover ${styles.convert}`}>
               <Swap color='#ffffff' />
               تبدیل
             </div>
-            <div className={styles.increaseBalance}>
+            <div className={`scaleOnHover ${styles.increaseBalance}`}>
               <Add color='#ffffff' />
               افزایش موجودی
             </div>

@@ -41,8 +41,8 @@ const customLabelsPlugin: Plugin<'doughnut'> = {
 
       const angle = (startAngle + endAngle) / 2
       const radius = (outerRadius + innerRadius) / 2
-      const positionX = x + radius * Math.cos(angle)
-      const positionY = y + radius * Math.sin(angle)
+      const positionX = x + radius * Math.cos(angle)*1.15
+      const positionY = y + radius * Math.sin(angle)*1.15
 
       ctx.font = 'bold 12px IranSans'
       ctx.fillStyle = 'black'
@@ -64,6 +64,27 @@ const customLabelsPlugin: Plugin<'doughnut'> = {
 
 const DoughnutChart: React.FC = () => {
   const chartRef = useRef<Chart<'doughnut'> | null>(null)
+  const total = data.datasets[0].data.reduce((acc, value) => acc + value, 0)
+
+  const legendItems = data.labels?.map((label, index) => {
+    const percentage = ((data.datasets[0].data[index] / total) * 100).toFixed()
+    return (
+      <div key={index} className={styles.legendBox}>
+        <div
+          className={styles.legendColor}
+          style={{
+            backgroundColor: Array.isArray(data.datasets[0].backgroundColor)
+              ? data.datasets[0].backgroundColor[index]
+              : undefined,
+          }}
+        ></div>
+        <div className={`${styles.legendText} number-font`}>
+          <p>{` ${label} `}</p>
+          <p> % {percentage}  </p>
+        </div>
+      </div>
+    )
+  })
 
   return (
     <div className={styles.chartContainer}>
@@ -75,25 +96,8 @@ const DoughnutChart: React.FC = () => {
           ref={chartRef}
         />
       </div>
-      <div>
-        {data.labels &&
-          data.labels.map((label, index) => (
-            <div key={index} className={styles.legendBox}>
-              <div
-                className={styles.legendColor}
-                style={{
-                  backgroundColor: Array.isArray(
-                    data.datasets[0].backgroundColor
-                  )
-                    ? data.datasets[0].backgroundColor[index]
-                    : undefined,
-                }}
-              ></div>
-              <div className={styles.legendText}>
-                <p>{`${label}`}</p>
-              </div>
-            </div>
-          ))}
+      <div className={styles.legendContainer}>
+        {legendItems}
       </div>
     </div>
   )

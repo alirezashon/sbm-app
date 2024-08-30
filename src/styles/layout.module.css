@@ -1,6 +1,8 @@
 .mainContent {
   display: flex;
   width: 100%;
-  padding: 1vh 1vh 0 1vh;
   background-color: #ffffff;
+}
+.content {
+  width: 100%;
 }

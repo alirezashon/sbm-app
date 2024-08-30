@@ -17,10 +17,12 @@ const RootLayout = ({
   return (
     <html lang='fa'>
       <body>
-        <Header />
         <main className={styles.mainContent}>
           <Sidebar />
+        <div className={styles.content}>
+        <Header />
           {children}
+        </div>
         </main>
       </body>
     </html>

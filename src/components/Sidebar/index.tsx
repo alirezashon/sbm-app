@@ -1,80 +1,109 @@
 'use client'
-import React, { useState } from 'react'
-import { data } from './data'
+import { useState } from 'react'
+import { data, Items } from './data'
 import styles from './index.module.css'
-import Image from 'next/image'
-import { Arrow, Dashboard } from '../IconGenerator'
+import {
+  Arrow,
+  CloseNav,
+  Dashboard,
+  VisitWallet,
+  Add,
+  Withdraw,
+  SendMoney,
+  Swap,
+} from '../IconGenerator'
 import Link from 'next/link'
+import Image from 'next/image'
+
 const Sidebar: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(true)
 
-  return (
-    <div className='' style={{ width: '18vw' }}>
-      <div
-        className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
-        style={{ width: '15vw' }}
-      >
-        <div className={styles.toggleButton} onClick={() => setIsOpen(!isOpen)}>
-          <Image
-            src={`/icons/${isOpen ? 'close.png' : 'open.png'}`}
-            alt='toggle'
-            width={20}
-            height={20}
-          />
-        </div>
+  const generateIcon = (index: number, parentOpen: boolean) => {
+    const iconList = [
+      <Dashboard color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
+      <VisitWallet
+        color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'}
+      />,
+      <Withdraw color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
+      <SendMoney color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
+      <Swap color={parentOpen ? 'white' : isOpen ? 'gray' : '#50545F'} />,
+    ]
+    return iconList[index]
+  }
 
-        <ul className={styles.menu}>
-          {data.map((item, index) => (
-            <li
-              key={index}
-              className={`${styles.menuItem} ${
+  return (
+    <div
+      className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
+    >
+      <div className={`${styles.topSection}`}>
+        {isOpen && (
+          <Image
+            src={'/icons/logo.svg'}
+            alt='logo'
+            width={200}
+            height={100}
+            className={styles.logo}
+          />
+        )}
+        <div className={styles.toggleButton} onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <CloseNav /> : <Dashboard color='gray' />}
+        </div>
+      </div>
+
+      <ul className={styles.menu}>
+        <p>منو اصلی</p>
+        {data.map((item, index) => (
+          <li
+            key={index}
+            className={`${styles.menuItem} `}
+            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+          >
+            <div
+              className={`${styles.itemHeader} ${
                 openIndex === index ? styles.active : ''
               }`}
             >
-              <div
-                className={styles.itemHeader}
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <Dashboard color='yellow' />
-                <Image
-                  src={`/icons/${item.icon}`}
-                  alt={item.name}
-                  width={20}
-                  height={20}
-                />
-                {isOpen && (
-                  <Link className={styles.link} href={item.link}>
-                    {item.name}
-                  </Link>
-                )}
-                {item.subItems && isOpen && (
-                  // openIndex === index ? 'up_arrow.png' : 'down_arrow.png'
-                  <Arrow color='red' dir='190' />
-                )}
-              </div>
-
-              {item.subItems && openIndex === index && isOpen && (
-                <ul className={styles.subMenu}>
-                  {item.subItems.map((subItem, subIndex) => (
-                    <li key={subIndex} className={styles.subMenuItem}>
-                      <Image
-                        src={`/icons/${subItem.icon}`}
-                        alt={subItem.name}
-                        width={15}
-                        height={15}
-                      />
-                      <Link className={styles.link} href={subItem.link}>
-                        {subItem.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              {generateIcon(index, openIndex === index)}
+              {isOpen && (
+                <Link
+                  className={`${styles.link} ${
+                    openIndex === index ? styles.active : ''
+                  }`}
+                  href={item.link}
+                >
+                  {item.name}
+                </Link>
               )}
-            </li>
-          ))}
-        </ul>
-      </div>
+              {item.subItems && isOpen && (
+                <div
+                  style={{
+                    transform: `rotate(${
+                      openIndex === index ? '180' : '0'
+                    }deg)`,
+                    display: 'flex',
+                  }}
+                >
+                  <Arrow color={openIndex === index ? 'white' : '#50545F'} />
+                </div>
+              )}
+            </div>
+
+            {item.subItems && openIndex === index && isOpen && (
+              <ul className={styles.subMenu}>
+                {item.subItems.map((subItem, subIndex) => (
+                  <li key={subIndex} className={styles.subMenuItem}>
+                    <Link className={styles.link} href={subItem.link}>
+                      {subItem.name}
+                      {generateIcon(index, openIndex === index)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

@@ -6,8 +6,8 @@ const data = {
   labels: ['برداشت شده', 'تبدیل شده', 'افزایش موجودی'],
   datasets: [
     {
-      data: [720, 20, 10],
-      backgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
+      data: [10, 20, 70],
+      backgroundColor: ['#0F973D','#D42620','#7747C0',  ],
       hoverBackgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
       borderWidth: 0,
     },

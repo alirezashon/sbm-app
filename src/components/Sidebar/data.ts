@@ -1,37 +1,90 @@
 export interface Items {
   name: string
   link: string
-  icon: string
-  subItems?: { name: string; link: string; icon: string }[]
+  subItems?: { name: string; link: string }[]
 }
-
 export const data: Items[] = [
   {
     name: 'داشبورد',
     link: '/dashboard',
-    icon: 'Dashboard',
   },
   {
     name: 'کیف پول',
     link: '/wallet',
-    icon: 'Wallet',
+    subItems: [{ name: 'کیف پول ویزیت', link: '/wallet/add' }],
+  },
+  {
+    name: 'کیف پول درگاه سلامت',
+    link: '/wallet/add',
     subItems: [
-      { name: 'افزایش موجودی', link: '/wallet/add', icon: 'add_money.png' },
-      { name: 'برداشت', link: '/wallet/withdraw', icon: 'withdraw.png' },
+      { name: 'افزایش موجودی', link: '/wallet/add' },
+      { name: 'تبدیل', link: '/wallet/swap' },
+      { name: 'برداشت', link: '/wallet/withdraw' },
     ],
   },
   {
-    name: 'گزارشات',
+    name: 'پشتیبانی آنلاین',
     link: '/reports',
-    icon: 'reports.png',
     subItems: [
-      { name: 'درآمد', link: '/reports/income', icon: 'income.png' },
-      { name: 'هزینه‌ها', link: '/reports/expenses', icon: 'expenses.png' },
+      { name: 'پشتیبانی تلفنی', link: '/reports/income' },
+      { name: '۰۲۱-۹۲۳۰۰۸۴۲', link: '/reports/expenses' },
+      {
+        name: 'پاسخگویی تلفنی ۸ صبح الی ۱۲ شب',
+        link: '/reports/expenses',
+      },
     ],
-  },
-  {
-    name: 'تنظیمات',
-    link: '/settings',
-    icon: 'settings.png',
   },
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export interface Items {
+//   name: string
+//   link: string
+//   subItems?: { name: string; link: string,subItems?: { name: string; link: string }[] }[]
+// }
+
+// export const data: Items[] = [
+//   {
+//     name: 'داشبورد',
+//     link: '/dashboard',
+//   },
+//   {
+//     name: 'کیف پول',
+//     link: '/wallet',
+//     subItems: [
+//       { name: 'کیف پول ویزیت', link: '/wallet/add' },
+//       {
+//         name: 'کیف پول درگاه سلامت',
+//         link: '/wallet/add',
+//         subItems: [
+//           { name: 'افزایش موجودی', link: '/wallet/add' },
+//           { name: 'تبدیل', link: '/wallet/swap' },
+//           { name: 'برداشت', link: '/wallet/withdraw' },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     name: 'پشتیبانی آنلاین',
+//     link: '/reports',
+//     subItems: [
+//       { name: 'پشتیبانی تلفنی', link: '/reports/income' },
+//       { name: '۰۲۱-۹۲۳۰۰۸۴۲', link: '/reports/expenses' },
+//       {
+//         name: 'پاسخگویی تلفنی ۸ صبح الی ۱۲ شب',
+//         link: '/reports/expenses',
+//       },
+//     ],
+//   },
+// ]

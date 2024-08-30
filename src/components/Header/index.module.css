@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4vh;
+}
+.userBox{
+    display: flex;
+    width:  25%;
+    justify-content: space-around;
+    align-items: center;
+}

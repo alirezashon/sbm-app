@@ -126,7 +126,7 @@ const Sidebar: React.FC = () => {
                       target='_blank'
                     >
                       <div className={`${styles.subItems}`}>
-                        {generateIcon(subItem.iconIndex, '#50545F')}
+                        {generateIcon(subItem.iconIndex, '#7747C0')}
                         {subItem.name}
                       </div>
                     </Link>
